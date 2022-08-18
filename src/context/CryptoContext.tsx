@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
 
 export interface CryptoContextInterface {
   currency: string;
@@ -36,6 +36,4 @@ const CryptoContext: React.FC <CryptoContextProps> = ({children}) => {
 
 export default CryptoContext;
 
-// export const CryptoState = () => {
-//   return useContext(Crypto)
-// }
+export const useCryptoContext = () => useContext(Crypto) as CryptoContextInterface

@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {AppBar, Container, Toolbar, Typography, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
 
 import styles from './header.module.scss'
-import { Crypto, CryptoContextInterface } from '../../context/CryptoContext';
+import { Crypto, CryptoContextInterface, useCryptoContext } from '../../context/CryptoContext';
 
 export const Header = () => {
   const nav = useNavigate()
+ 
+  const {currency, setCurrency} = useCryptoContext() 
 
-  const {currency, setCurrency} = React.useContext(Crypto) as CryptoContextInterface
+  console.log(currency)
 
   const darkTheme = createTheme({
     palette: {
