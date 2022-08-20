@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom'
 
 import { useCryptoContext } from '../../context/CryptoContext'
-import { TrendingCoinsType } from '../../types/types'
-import { RoundNumber } from '../utils/CoinsTable'
+import { CoinType } from '../../types/types'
+import { RoundNumber } from '../../utils/CoinsTable'
 
 import styles from './carousel.module.scss'
 
 interface CarouselItemProps {
-  item: TrendingCoinsType
+  item: CoinType
 }
 
 export const CarouselItem: React.FC <CarouselItemProps> = ({item}) => {
   const {symbol} = useCryptoContext()
   
-  let profit = item.price_change_24h >=0
+  let profit = item.price_change_percentage_24h >=0
   return (
     <Link to={`/coins/${item.id}`} className={styles.carouselItem}>
       <img 
@@ -29,7 +29,7 @@ export const CarouselItem: React.FC <CarouselItemProps> = ({item}) => {
               fontWeight: 500,
             }}>
           {profit && '+'} 
-           {item.price_change_24h.toFixed(2)}%
+           {item.price_change_percentage_24h.toFixed(2)}%
         </span>
       </span>
       <span style={{fontSize: 22, fontWeight: 500}}>

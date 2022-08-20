@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import {  CoinPage, Home } from './pages'
 import { Header } from './components'
 
-import './css/app.css'
+import './scss/index.scss'
 
 const App = () => {
   return (

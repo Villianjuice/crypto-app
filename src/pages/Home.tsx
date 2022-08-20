@@ -1,10 +1,11 @@
 import React from 'react'
-import { Banner } from '../components'
+import { Banner, CoinsList } from '../components'
 
 const Home = () => {
   return (
     <div>
       <Banner />
+      <CoinsList />
     </div>
   )
 }

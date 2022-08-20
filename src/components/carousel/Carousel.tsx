@@ -7,15 +7,15 @@ import { TrendingCoins } from '../../config/api'
 import { useCryptoContext } from '../../context/CryptoContext'
 
 import styles from './carousel.module.scss'
-import { TrendingCoinsType } from '../../types/types'
+import { CoinType } from '../../types/types'
 import { CarouselItem } from './CarouselItem';
 
 export const Carousel = () => {
-  const [tranding, setTranding] = useState<TrendingCoinsType[]>([])
+  const [tranding, setTranding] = useState<CoinType[]>([])
   const {currency} = useCryptoContext()
 
   const fetchTrendingCoins = useCallback(async () => {
-    const {data} = await axios.get<TrendingCoinsType[]>(TrendingCoins(currency))
+    const {data} = await axios.get<CoinType[]>(TrendingCoins(currency))
     setTranding(data)
   }, [currency])
 

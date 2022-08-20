@@ -1,0 +1,17 @@
+.coins {
+  &__img {
+    margin-bottom: 10px;
+    height: 45px;
+  }
+  &__about {
+    display: flex;
+    flex-direction: column
+  }
+  &__symbol {
+    text-transform: uppercase;
+    font-size: 22px
+  }
+  &__title {
+    color: darkgrey
+  }
+}

@@ -10,8 +10,6 @@ export const Header = () => {
  
   const {currency, setCurrency} = useCryptoContext() 
 
-  console.log(currency)
-
   const darkTheme = createTheme({
     palette: {
       primary: {
