@@ -15,7 +15,7 @@ export const CarouselItem: React.FC <CarouselItemProps> = ({item}) => {
   
   let profit = item.price_change_percentage_24h >=0
   return (
-    <Link to={`/coins/${item.id}`} className={styles.carouselItem}>
+    <Link to={`/coin/${item.id}`} className={styles.carouselItem}>
       <img 
         src={item.image} 
         alt={item.name}  

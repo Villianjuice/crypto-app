@@ -45,7 +45,7 @@ export const Carousel = () => {
         autoPlay
         items={
           tranding.map(item => 
-            <CarouselItem item={item}/>  
+            <CarouselItem  item={item}/>  
           )
         }
         

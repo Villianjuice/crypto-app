@@ -8,6 +8,30 @@ export type CoinType = {
   market_cap: number
 }
 
-// export type CoinType = {
-//   id: string;
-// }
+export type ISingleCoin = {
+  id: string;
+  image: {
+    thumb: string;
+    small: string;
+    large: string;  
+  }
+  name: string;
+  description: {
+    en: string
+  };
+  market_cap_rank: number;
+  market_data: {
+    current_price: {
+      rub: number;
+      usd: number;
+    };
+    market_cap: {
+      rub: number;
+      usd: number;
+    }
+  }
+}
+
+export type IChart = {
+  prices: Array<number[]>
+}

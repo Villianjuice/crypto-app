@@ -15,12 +15,10 @@ const sx = {
   title: {
     fontWeight: 'bold',
     marginBottom: '15px',
-    fontFamily: 'Montserrat',
   },
   subtitle: {
     color: "darkgrey",
     textTransform: "capitalize",
-    fontFamily: "Montserrat",
   }
 }
 

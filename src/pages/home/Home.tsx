@@ -1,5 +1,5 @@
 import React from 'react'
-import { Banner, CoinsList } from '../components'
+import { Banner, CoinsList } from '../../components'
 
 const Home = () => {
   return (

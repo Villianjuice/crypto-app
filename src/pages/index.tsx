@@ -1,2 +1,2 @@
-export {default as Home} from './Home'
-export {default as CoinPage} from './CoinPage'
+export {default as Home} from './home/Home'
+export {default as CoinPage} from './coinPage/CoinPage'

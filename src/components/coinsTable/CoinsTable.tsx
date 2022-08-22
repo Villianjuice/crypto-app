@@ -20,8 +20,7 @@ const sx = {
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#131111",
-    },
-    fontFamily: "Montserrat",
+    }
   },
   linear: {
     backgroundColor: "gold"
@@ -36,7 +35,6 @@ const sx = {
   tableCellNames: {
     color: "black",
     fontWeight: "700",
-    fontFamily: "Montserrat",
   },
   pagination: {
     padding: '25px',
@@ -66,8 +64,6 @@ export const CoinsTable: React.FC <CoinsTableProps> = ({search}) => {
 
   const nav = useNavigate()
 
-  console.log(coins.length)
-
   return (
     <>
       <TableContainer>
@@ -95,9 +91,9 @@ export const CoinsTable: React.FC <CoinsTableProps> = ({search}) => {
                 <TableRow 
                   sx={sx.row}
                   key={coin.id}
+                  onClick={() => nav(`/coin/${coin.id}`)} 
                 >
                   <TableCell 
-                    onClick={() => nav('/coin/1')} 
                     component='th' 
                     scope='row' 
                     sx={sx.tableCellCoin}

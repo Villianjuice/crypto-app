@@ -30,7 +30,7 @@ export const CoinsList = () => {
       <Container sx={{textAlign: 'center'}}>
         <Typography
           variant="h4"
-          style={{ margin: 18, fontFamily: "Montserrat" }}
+          style={{ margin: 18}}
         >
           Cryptocurrency Prices by Market Cap
         </Typography>

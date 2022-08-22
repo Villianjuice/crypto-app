@@ -1,20 +1,32 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { createTheme, ThemeProvider } from '@mui/material'
 
 import {  CoinPage, Home } from './pages'
 import { Header } from './components'
 
 import './scss/index.scss'
 
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "Montserrat",
+    }
+  }
+});
+
+
 const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path='/' element={< Home />}/>
-        <Route path='/coins/0' element={< CoinPage />}/>
-      </Routes>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path='/' element={< Home />}/>
+          <Route path='/coin/:id' element={< CoinPage />}/>
+        </Routes>
+      </div>
+    </ThemeProvider>
+    
   )
 }
 
