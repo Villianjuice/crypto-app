@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {AppBar, Container, Toolbar, Typography, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
 
 import styles from './header.module.scss'
-import { Crypto, CryptoContextInterface, useCryptoContext } from '../../context/CryptoContext';
+import { useCryptoContext } from '../../context/CryptoContext';
+import { AuthModal } from '../index';
 
 export const Header = () => {
   const nav = useNavigate()
@@ -44,6 +45,7 @@ export const Header = () => {
               <MenuItem value={'USD'}>USD</MenuItem>
               <MenuItem value={'RUB'}>RUB</MenuItem>
             </Select>
+            <AuthModal />
           </Toolbar>
         </Container>
       </AppBar>

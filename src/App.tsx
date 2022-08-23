@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import { createTheme, ThemeProvider } from '@mui/material'
+import {  createTheme, ThemeProvider } from '@mui/material'
 
 import {  CoinPage, Home } from './pages'
 import { Header } from './components'
+import { AlertMessage } from './composables'
 
 import './scss/index.scss'
 
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/coin/:id' element={< CoinPage />}/>
         </Routes>
       </div>
+      <AlertMessage />
     </ThemeProvider>
     
   )

@@ -1,3 +1,6 @@
+export * from './authentication/AuthModal'
+export * from './authentication/Login'
+export * from './authentication/SignUp'
 export * from './header/Header'
 export * from './banner/Banner'
 export * from './carousel/Carousel'

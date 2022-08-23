@@ -35,3 +35,7 @@ export type ISingleCoin = {
 export type IChart = {
   prices: Array<number[]>
 }
+
+export interface IUser {
+  id: string
+} 
