@@ -3,20 +3,25 @@ import { IUser } from "../../types/types";
 
 type userSliceState = {
   user: IUser | null;
-  loading: boolean;
-  error: string | null
 }
 
 const initialState: userSliceState  = {
-  user: null,
-  loading: false,
-  error: null
+  user: null
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {}
+  reducers: {
+    login: (state, action) => {
+      state.user = action.payload;
+    },
+    logout: (state) => {
+      state.user = null;
+    },
+  }
 })
+
+export const {login, logout} = userSlice.actions
 
 export default userSlice.reducer

@@ -5,11 +5,14 @@ import {AppBar, Container, Toolbar, Typography, Select, MenuItem, createTheme, T
 import styles from './header.module.scss'
 import { useCryptoContext } from '../../context/CryptoContext';
 import { AuthModal } from '../index';
+import { useAppSelector } from '../../store/hooks';
 
 export const Header = () => {
   const nav = useNavigate()
  
   const {currency, setCurrency} = useCryptoContext() 
+
+  const user = useAppSelector(state => state.user.user);
 
   const darkTheme = createTheme({
     palette: {
@@ -45,7 +48,8 @@ export const Header = () => {
               <MenuItem value={'USD'}>USD</MenuItem>
               <MenuItem value={'RUB'}>RUB</MenuItem>
             </Select>
-            <AuthModal />
+            {user ? 'Logout' : <AuthModal />}
+            
           </Toolbar>
         </Container>
       </AppBar>
