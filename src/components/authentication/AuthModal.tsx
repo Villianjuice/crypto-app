@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import { Button, Fade, Modal, Box, Typography, Backdrop, AppBar, Tabs, Tab } from "@mui/material";
-import { Login, SignUp } from "../index";
+import { Button, Fade, Modal, Box, Backdrop, AppBar, Tabs, Tab } from "@mui/material";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import GoogleButton from "react-google-button";
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { Login, SignUp } from "../index";
+import { auth } from "../../firebase/firebase";
+import { useCryptoContext } from "../../context/CryptoContext";
 
 const sx = {
   modal: {
@@ -41,6 +34,16 @@ const sx = {
   },
   tabs: {
     borderRadius: 10
+  },
+  google: {
+    padding: '24px',
+    paddingTop: 0,
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "center",
+    gap: '20px',
+    fontSize: '16px',
+    opacity: '0.8'
   }
 }
 
@@ -48,11 +51,39 @@ export const AuthModal = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
 
+  const {setAlert} = useCryptoContext()
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const googleProvider = new GoogleAuthProvider();
+
+  const signInWithGoogle = async() => {
+    try {
+      const response = await signInWithPopup(auth, googleProvider)
+
+      setAlert({
+        open: true,
+        message: `Sign Up Successful. Welcome ${response.user.email}`,
+        type: 'success'
+      })
+
+      handleClose()
+    }
+    catch (error) {
+      let message
+      if (error instanceof Error) message = error.message
+      else message = String(error)
+      setAlert({
+        open: true,
+        message: message,
+        type: 'error'
+      })
+    }
+  };
 
   return (
     <div>
@@ -85,6 +116,13 @@ export const AuthModal = () => {
             </AppBar>
             {value === 0 && <Login handleClose={handleClose}/>}
             {value === 1 && <SignUp handleClose={handleClose}/>}
+            <Box sx={sx.google}>
+              <span>Or</span>
+              <GoogleButton
+                style={{ width: "100%", outline: "none" }}
+                onClick={signInWithGoogle}
+              />
+            </Box>
           </Box>
         </Fade>
       </Modal>

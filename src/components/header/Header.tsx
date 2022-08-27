@@ -4,7 +4,7 @@ import {AppBar, Container, Toolbar, Typography, Select, MenuItem, createTheme, T
 
 import styles from './header.module.scss'
 import { useCryptoContext } from '../../context/CryptoContext';
-import { AuthModal } from '../index';
+import { AuthModal, UserSlidebar } from '../index';
 import { useAppSelector } from '../../store/hooks';
 
 export const Header = () => {
@@ -48,7 +48,7 @@ export const Header = () => {
               <MenuItem value={'USD'}>USD</MenuItem>
               <MenuItem value={'RUB'}>RUB</MenuItem>
             </Select>
-            {user ? 'Logout' : <AuthModal />}
+            {user ? <UserSlidebar  /> : <AuthModal />}
             
           </Toolbar>
         </Container>
