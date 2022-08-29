@@ -1,16 +1,18 @@
+import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import {  createTheme, ThemeProvider } from '@mui/material'
+import { onAuthStateChanged } from 'firebase/auth'
 
 import {  CoinPage, Home } from './pages'
 import { Header } from './components'
 import { AlertMessage } from './composables'
-import { useAppDispatch } from './store/hooks'
+import { useAppDispatch, useAppSelector } from './store/hooks'
 
-import './scss/index.scss'
-import { useEffect } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './firebase/firebase'
+import { auth, db } from './firebase/firebase'
 import { login, logout } from './store/userSlice/UserSlice'
+import './scss/index.scss'
+import { doc, onSnapshot } from 'firebase/firestore'
+import { setWatchList } from './store/watchList/watchList'
 
 const theme = createTheme({
   typography: {
@@ -23,6 +25,7 @@ const theme = createTheme({
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(state => state.user.user)
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -40,6 +43,22 @@ const App = () => {
       }
     });
   }, [dispatch])
+
+  useEffect(() => {
+    if (user) {
+      const coinRef = doc(db, "watchlist", user.uid);
+      const unsubscribe = onSnapshot(coinRef, (coin) => {
+        if (coin.exists()) {
+          dispatch(setWatchList(coin.data().coins));
+        } else {
+          console.log("No Items in Watchlist");
+        }
+      });
+      return () => {
+        unsubscribe()
+      }
+   }
+  }, [user, dispatch])
   
   return (
     <ThemeProvider theme={theme}>

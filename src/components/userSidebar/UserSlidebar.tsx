@@ -1,11 +1,16 @@
+import React from 'react';
 import { Avatar, Button, Drawer } from '@mui/material';
 import { signOut } from 'firebase/auth';
-import React from 'react';
-import { useCryptoContext } from '../../context/CryptoContext';
-import { auth } from '../../firebase/firebase';
+import { AiFillDelete } from 'react-icons/ai'
 
+import { useCryptoContext } from '../../context/CryptoContext';
+import { auth, db } from '../../firebase/firebase';
 import { useAppSelector } from '../../store/hooks';
+import { addedCoinsSelector } from '../../store/watchList/watchList';
 import styles from './sidebar.module.scss'
+import { RoundNumber } from '../../utils/RoundNumber';
+import { doc, setDoc } from 'firebase/firestore';
+import { CoinType } from '../../types/types';
 
 type Anchor = 'right';
 const anchor = 'right'
@@ -25,9 +30,12 @@ const sx = {
   },
 }
 
-export const UserSlidebar = () => {
+export const UserSidebar = () => {
   const user = useAppSelector(state => state.user.user)
-  const {setAlert} = useCryptoContext()
+  const watchList = useAppSelector(state => state.watchList.watchList)
+  const addedCoins = useAppSelector(addedCoinsSelector)
+  console.log(addedCoins)
+  const {setAlert, symbol} = useCryptoContext()
 
   const [state, setState] = React.useState({
     right: false,
@@ -68,8 +76,34 @@ export const UserSlidebar = () => {
         type: 'error'
       })
     }
-    
   };
+
+  const removeFromWatchlist = async(coin: CoinType) => {
+    if (user) {
+      try {
+        const coinRef = doc(db, "watchlist", user.uid)
+        await setDoc(coinRef, 
+          { coins: watchList.filter((wish) => wish !== coin?.id)},
+          { merge: true }
+        )
+        setAlert({
+          open: true,
+          message: `${coin.name} Removed from the Watchlist !`,
+          type: "success",
+        });
+      }
+      catch (error) {
+        let message
+        if (error instanceof Error) message = error.message
+        else message = String(error)
+        setAlert({
+          open: true,
+          message: message,
+          type: 'error'
+        })
+      }
+    }
+  }
 
   return (
     <div>
@@ -96,6 +130,20 @@ export const UserSlidebar = () => {
               <span className={styles['sidebar__list-title']}>
                 Watchlist
               </span>
+              {addedCoins.map(coin => 
+                <div key={coin.id} className={styles.sidebar__coin}>
+                  <span>{coin.name}</span>
+                  <span style={{ display: "flex", gap: 8 }}>
+                    {symbol}{" "}
+                    {RoundNumber(coin.current_price.toFixed(2))}
+                    <AiFillDelete
+                      style={{ cursor: "pointer" }}
+                      fontSize="16"
+                      onClick={() => removeFromWatchlist(coin)}
+                    />
+                  </span>
+                </div>  
+              )}
             </div>
             <Button
               variant="contained"

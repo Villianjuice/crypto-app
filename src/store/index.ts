@@ -3,6 +3,7 @@ import coinsSlice from './coinsSlice/CoinsSlice';
 import singleCoinSlice from './singleCoin/SingleCoin';
 import chartSlice from './historicalChart/HistoricalChart';
 import UserSlice from './userSlice/UserSlice';
+import watchListSlice from './watchList/watchList';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     singleCoin: singleCoinSlice,
     chart: chartSlice,
     user: UserSlice,
+    watchList: watchListSlice,
   },
 });
 

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { useCryptoContext } from '../../context/CryptoContext'
 import { CoinType } from '../../types/types'
-import { RoundNumber } from '../../utils/CoinsTable'
+import { RoundNumber } from '../../utils/RoundNumber'
 
 import styles from './carousel.module.scss'
 

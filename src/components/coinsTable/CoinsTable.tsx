@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCryptoContext } from '../../context/CryptoContext'
 import { RootState } from '../../store'
 import { useAppSelector } from '../../store/hooks'
-import { RoundNumber } from '../../utils/CoinsTable'
+import { RoundNumber } from '../../utils/RoundNumber'
 
 import styles from './coinsTable.module.scss'
 
