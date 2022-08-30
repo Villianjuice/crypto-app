@@ -22,7 +22,7 @@ const sx = {
   }
 }
 
-export const Banner = () => {
+const Banner = () => {
   return (
     <div className={styles.banner}>
       <Container sx={sx.content}>
@@ -39,3 +39,5 @@ export const Banner = () => {
     </div>
   )
 }
+
+export default Banner

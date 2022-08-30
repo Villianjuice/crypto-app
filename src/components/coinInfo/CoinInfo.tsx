@@ -64,6 +64,9 @@ export const CoinInfo: React.FC <CoinInfoProps> = ({coin}) => {
         {chart && 
           <CoinChart chart={chart}/>
         }
+        {error &&
+          <h2>{error}</h2>
+        }
       </Container>
     </ThemeProvider>
   )

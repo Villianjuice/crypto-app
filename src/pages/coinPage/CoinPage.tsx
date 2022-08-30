@@ -45,6 +45,7 @@ const CoinPage = () => {
           <CoinInfo coin={coin}/> 
         </>
       )}
+      {error && <h2>{error}</h2>}
     </Container>
   )
 }

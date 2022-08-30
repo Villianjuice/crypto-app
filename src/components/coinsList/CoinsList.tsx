@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { Container, createTheme, TextField, ThemeProvider, Typography } from '@mui/material'
 
 import { useCryptoContext } from '../../context/CryptoContext'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { useAppDispatch } from '../../store/hooks'
 import { fetchCoins } from '../../store/coinsSlice/CoinsSlice'
 import { CoinsTable } from '../index'
 
-export const CoinsList = () => {
+const CoinsList = () => {
   const { currency } = useCryptoContext()
   const [search, setSearch] = useState("");
 
@@ -24,6 +24,10 @@ export const CoinsList = () => {
       mode: "dark",
     },
   });
+
+  // if (Math.random() > 0.5) {
+  //   return new Error('error')
+  // }
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -46,3 +50,5 @@ export const CoinsList = () => {
     </ThemeProvider>
   )
 }
+
+export default CoinsList

@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import {  createTheme, ThemeProvider } from '@mui/material'
+import {  createTheme, LinearProgress, ThemeProvider } from '@mui/material'
 import { onAuthStateChanged } from 'firebase/auth'
 
-import {  CoinPage, Home } from './pages'
 import { Header } from './components'
 import { AlertMessage } from './composables'
 import { useAppDispatch, useAppSelector } from './store/hooks'
@@ -13,6 +12,9 @@ import { login, logout } from './store/userSlice/UserSlice'
 import './scss/index.scss'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { setWatchList } from './store/watchList/watchList'
+
+const Home = lazy(() => import('./pages/home/Home'))
+const CoinPage = lazy(() => import('./pages/coinPage/CoinPage'))
 
 const theme = createTheme({
   typography: {
@@ -64,10 +66,11 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
-        <Routes>
-          <Route path='/' element={< Home />}/>
-          <Route path='/coin/:id' element={< CoinPage />}/>
-        </Routes>
+          
+            <Routes>
+                <Route path='/' element={ <Suspense fallback={<LinearProgress />}>< Home /></Suspense> }/>
+                <Route path='/coin/:id' element={<Suspense fallback={<LinearProgress />}>< CoinPage /></Suspense>}/>
+            </Routes>
       </div>
       <AlertMessage />
     </ThemeProvider>
